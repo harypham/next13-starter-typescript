@@ -23,18 +23,9 @@ export default function Home() {
     }
   );
 
-  console.log(">>> check data: ", data)
-
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await fetch("http://localhost:8000/blogs");
-  //     const data = await res.json();
-
-  //     console.log(">>> check res: ", data)
-  //   }
-  //   fetchData();
-  // }, [])
+  if (!data) {
+    return <div>loading...</div>
+  }
 
   return (
     <div>
@@ -57,7 +48,9 @@ export default function Home() {
           </Link>
         </li>
       </ul>
-      <AppTable />
+      <AppTable
+        blogs={data}
+      />
     </div>
   )
 }
