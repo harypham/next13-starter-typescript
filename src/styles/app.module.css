@@ -7,3 +7,10 @@
     color: green;
     border: 1px solid green;
 }
+
+.cut-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
