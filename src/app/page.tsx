@@ -1,11 +1,11 @@
 
 import Link from 'next/link'
-
+import x from '@/styles/app.module.css'
 export default function Home() {
   return (
     <div>
       <ul>
-        <li>
+        <li className={x['red']}>
           <Link href="/admin">
             Admin
           </Link>
