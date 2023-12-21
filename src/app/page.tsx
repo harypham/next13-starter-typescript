@@ -13,7 +13,7 @@ export default function Home() {
         </li>
         <li>
           <Link href="/youtube">
-            YouTube
+            YouTube Hello
           </Link>
         </li>
         <li>
