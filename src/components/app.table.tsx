@@ -2,6 +2,8 @@
 
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
+import CreateModal from './create.modal';
+import { useState } from 'react';
 interface IProps {
   blogs: IBlog[];
 }
@@ -10,7 +12,13 @@ function AppTable(props: IProps) {
 
   const { blogs } = props;
 
+  const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
   return (
+    <>
+    <div className='mb-3' style={{display: "flex", justifyContent: "space-between"}}>
+      <h3>Table Blogs</h3>
+      <Button variant="primary" onClick={() => setShowModalCreate(true)}>Add New</Button>
+    </div>
     <Table striped bordered hover>
       <thead>
         <tr>
@@ -37,6 +45,11 @@ function AppTable(props: IProps) {
         })}
       </tbody>
     </Table>
+    <CreateModal 
+      showModalCreate={showModalCreate}
+      setShowModalCreate={setShowModalCreate}
+    />
+    </>
   );
 }
 
