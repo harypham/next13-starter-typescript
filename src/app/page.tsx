@@ -24,8 +24,8 @@ export default function Home() {
   //   }
   //   fetchData();
   // }, []);
-
-
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>Loading...</div>;
   return (
     <div>
       <ul>
@@ -50,7 +50,9 @@ export default function Home() {
           </Link>
         </li>
       </ul>
-        <AppTable />
+        <AppTable 
+          blogs={data}
+        />
     </div>
   )
 }
