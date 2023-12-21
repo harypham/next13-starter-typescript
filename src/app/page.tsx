@@ -3,17 +3,27 @@ import Link from 'next/link'
 import x from '@/styles/app.module.css'
 import AppTable from '@/components/app.table'
 import { useEffect } from 'react';
+import useSWR from 'swr';
+
 
 export default function Home() {
 
-  useEffect(() => {
-    const fetchData = async () => { 
-      const res = await fetch("http://localhost:8000/blogs");
-      const data = await res.json();
-      console.log("check data", data);
-    }
-    fetchData();
-  }, []);
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+  const {data, error, isLoading} = useSWR("http://localhost:8000/blogs", fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
+  // useEffect(() => {
+  //   const fetchData = async () => { 
+  //     const res = await fetch("http://localhost:8000/blogs");
+  //     const data = await res.json();
+  //     console.log("check data", data);
+  //   }
+  //   fetchData();
+  // }, []);
 
 
   return (
