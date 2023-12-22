@@ -3,16 +3,19 @@
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
 import CreateModal from './create.modal';
+import UpdateModal from './update.modal';
 import { useState } from 'react';
 interface IProps {
   blogs: IBlog[];
 }
 
 function AppTable(props: IProps) {
-
   const { blogs } = props;
 
+  const [blog, setBlog] = useState<IBlog | null>(null);
+
   const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
+  const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
   return (
     <>
     <div className='mb-3' style={{display: "flex", justifyContent: "space-between"}}>
@@ -29,15 +32,15 @@ function AppTable(props: IProps) {
         </tr>
       </thead>
       <tbody>
-        {blogs.map((blog, index) => {
+        {blogs.map((item) => {
           return (
-            <tr key={blog.id}>
-              <td>{blog.id}</td>
-              <td>{blog.title}</td>
-              <td>{blog.author}</td>
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.title}</td>
+              <td>{item.author}</td>
               <td>
                 <Button variant="success" className='mx-3'>View</Button>
-                <Button variant="primary">Edit</Button>
+                <Button variant="primary" onClick={() => {setBlog(item); setShowModalUpdate(true);}}>Edit</Button>
                 <Button variant="danger" className='mx-3'>Delete</Button>
               </td>
             </tr>
@@ -49,6 +52,13 @@ function AppTable(props: IProps) {
       showModalCreate={showModalCreate}
       setShowModalCreate={setShowModalCreate}
     />
+    <UpdateModal
+      showModalUpdate={showModalUpdate}
+      setShowModalUpdate={setShowModalUpdate}
+      blog={blog}
+      setBlog={setBlog}
+    />
+
     </>
   );
 }
